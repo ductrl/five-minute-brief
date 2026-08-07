@@ -1,0 +1,10 @@
+{
+  "manifest_version": 3,
+  "name": "Five Minute Brief",
+  "version": "0.1.0",
+  "description": "A five-minute daily briefing of major US and world news.",
+  "action": {
+    "default_popup": "index.html"
+  },
+  "permissions": ["storage"]
+}
