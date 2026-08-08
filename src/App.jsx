@@ -8,20 +8,28 @@ import { useState } from "react";
 const App = () => {
   const [status, setStatus] = useState('success');
 
+  if (status !== 'success') {
+    return (
+      <main>
+        <Header/>
+        <StatusMessage status={status}/>
+      </main>
+    )
+}
+
   return (
-    <>
+    <main>
       <Header 
         date={mockBrief.date} 
         storyCount={mockBrief.stories.length}
       />
-      <StatusMessage status={status}/>
 
       <StoryList 
         stories={mockBrief.stories}
       />
 
       <Footer publishedAt={mockBrief.publishedAt}/>
-    </>
+    </main>
   )
 }
 
