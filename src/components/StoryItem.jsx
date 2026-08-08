@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const StoryItem = ({ headline, summary }) => {
+const StoryItem = ({ headline, summary, sources }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -9,6 +9,7 @@ const StoryItem = ({ headline, summary }) => {
 
   return (
     <article>
+      {/* ----- Headline ----- */}
       <button
         onClick={handleToggle}
       >
@@ -21,9 +22,19 @@ const StoryItem = ({ headline, summary }) => {
         </span>
       </button>
 
+      {/* ----- Content ----- */}
       {isOpen && (
         <div>
-          {summary}
+          <p>{summary}</p>
+          {sources.map(source => (
+            <a 
+              key={source.publisher}
+              href={source.url}
+              target="_blank"
+            >
+              {source.publisher}|
+            </a>
+          ))}
         </div>
       )}
     </article>

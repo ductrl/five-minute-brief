@@ -36,6 +36,10 @@ export const mockBrief = {
           publisher: 'Reuters',
           url: 'https://www.reuters.com',
         },
+        {
+          publisher: 'AP',
+          url: 'https://apnews.com',
+        },
       ],
     },
 

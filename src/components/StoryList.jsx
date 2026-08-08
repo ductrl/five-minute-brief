@@ -8,6 +8,7 @@ const StoryList = ({ stories }) => {
           key={story.id}
           headline={story.headline}
           summary={story.summary}
+          sources={story.sources}
         />
       ))}
     </section>
