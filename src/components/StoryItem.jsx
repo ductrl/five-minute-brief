@@ -1,7 +1,12 @@
 import { useState } from "react";
 
-const StoryItem = ({ headline, summary, sources }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const StoryItem = ({ 
+  headline, 
+  summary, 
+  sources,
+  defaultOpen=false
+}) => {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
