@@ -1,6 +1,6 @@
 import Header from "./components/Header";
-import StoryItem from "./components/StoryItem";
 import StoryList from "./components/StoryList";
+import Footer from "./components/Footer";
 import { mockBrief } from "./data/mockBrief";
 
 const App = () => {
@@ -15,9 +15,9 @@ const App = () => {
         stories={mockBrief.stories}
       />
 
-      <footer>This is the footer</footer>
+      <Footer publishedAt={mockBrief.publishedAt}/>
     </>
   )
 }
 
-export default App
+export default App;
