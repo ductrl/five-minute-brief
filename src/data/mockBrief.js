@@ -1,7 +1,7 @@
 // FAKE MOCK DATA
 
 export const mockBrief = {
-  date: 'August 7',
+  date: 'August 7, 2026',
   publishedAt: '8:00 a.m. ET',
 
   stories: [
