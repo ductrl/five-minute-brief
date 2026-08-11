@@ -14,7 +14,7 @@ const SourceSchema = z.object({
 
 const StorySchema = z.object({
   id: z.string().trim().min(1),
-  headline: z.string().trim().min(1).max(12),
+  headline: z.string().trim().min(1),
   summary: z
     .string()
     .trim()
