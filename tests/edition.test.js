@@ -75,4 +75,107 @@ describe('EditionSchema', () => {
       code: "invalid_format"
     });
   })
+
+  test('rejects edition with more than 7 stories', () => {
+    const edition = createValidEdition();
+
+    while (edition.stories.length < 8) {
+      edition.stories.push({
+        ...edition.stories[0],
+        id: `story-${edition.stories.length + 1}`
+      });
+    }
+
+    expectInvalid(edition, {
+      path: ['stories'],
+      code: 'too_big',
+    });
+  })
+
+  test('rejects stories with no sources', () => {
+    const edition = createValidEdition();
+    edition.stories[0].sources = [];
+
+    expectInvalid(edition, {
+      path: ['stories', 0, 'sources'],
+      code: 'too_small',
+    });
+  })
+
+  test('reject stories with more than 3 sources', () => {
+    const edition = createValidEdition();
+    edition.stories[0].sources = [
+      { publisher: 'Reuters', url: 'https://reuters.com' },
+      { publisher: 'BBC', url: 'https://bbc.com' },
+      { publisher: 'AP', url: 'https://apnews.com' },
+      { publisher: 'CNN', url: 'https://cnn.com' },
+    ];
+
+    expectInvalid(edition, {
+      path: ['stories', 0, 'sources'],
+      code: 'too_big',
+    });
+  })
+
+  test('rejects empty publisher names', () => {
+    const edition = createValidEdition();
+    edition.stories[0].sources[0].publisher = '';
+
+    expectInvalid(edition, {
+      path: ['stories', 0, 'sources', 0, 'publisher'],
+      code: 'too_small',
+    });
+  })
+
+  test('rejects malformed source URLs', () => {
+    const edition = createValidEdition();
+    edition.stories[0].sources[0].url = 'not-a-url';
+
+    expectInvalid(edition, {
+      path: ['stories', 0, 'sources', 0, 'url'],
+      code: 'invalid_format',
+    });
+  })
+
+  test('rejects invalid edition dates', () => {
+    const edition = createValidEdition();
+    edition.editionDate = 'August 11, 2026';
+
+    expectInvalid(edition, {
+      path: ['editionDate'],
+      code: 'invalid_format',
+    });
+  })
+
+  test('rejects invalid coverage timestamps', () => {
+    const edition = createValidEdition();
+    edition.coverageStart = 'not-a-datetime';
+
+    expectInvalid(edition, {
+      path: ['coverageStart'],
+      code: 'invalid_format',
+    });
+  })
+
+  test('rejects coverage end before coverage start', () => {
+    const edition = createValidEdition();
+
+    edition.coverageStart = '2026-08-12T04:00:00Z';
+    edition.coverageEnd = '2026-08-11T04:00:00Z';
+
+    expectInvalid(edition, {
+      path: ['coverageEnd'],
+      message: 'Coverage end must occur after coverage start',
+    });
+  })
+
+  test('rejects unsupported schema versions', () => {
+    const edition = createValidEdition();
+    edition.schemaVersion = 2;
+
+    expectInvalid(edition, {
+      path: ['schemaVersion'],
+      code: 'invalid_value',
+    });
+  })
 })
