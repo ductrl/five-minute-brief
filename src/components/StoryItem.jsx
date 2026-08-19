@@ -13,24 +13,28 @@ const StoryItem = ({
   }
 
   return (
-    <article>
+    <article className="border-bottom py-4">
       {/* ----- Headline ----- */}
       <button
+        className="story-toggle btn w-100 p-0 border-0 d-flex justify-content-between align-items-start text-start"
         onClick={handleToggle}
       >
-        <span>{headline}</span> 
-        <span>
-          {isOpen
-            ? <i className="bi bi-chevron-up"></i>
-            : <i className="bi bi-chevron-down"></i>
-          }
-        </span>
+        <span className="story-headline fw-semibold">
+          {headline}
+        </span> 
+        <i
+          className={`bi ${
+            isOpen ? 'bi-chevron-up' : 'bi-chevron-down'
+          } ms-3 flex-shrink-0`}
+        ></i>
       </button>
 
       {/* ----- Content ----- */}
       {isOpen && (
         <div>
-          <p>{summary}</p>
+          <p className="story-summary pt-3">
+            {summary}
+          </p>
           {sources.map(source => (
             <a 
               key={source.publisher}

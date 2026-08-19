@@ -1,4 +1,5 @@
 /* FONTS */
+@import "@fontsource/dm-sans/300.css";
 @import "@fontsource/dm-sans/400.css";
 @import "@fontsource/dm-sans/500.css";
 @import "@fontsource/dm-sans/600.css";
@@ -8,7 +9,7 @@
 @import "@fontsource/source-serif-4/600.css";
 
 :root {
-  --brief-bg: #EEF1E5;
+  --brief-bg: #f8f8f0;
   --brief-headline: #172018;
   --brief-text: #3E493D;
   --brief-secondary: #657064;
@@ -21,14 +22,16 @@
 
 body {
   margin: 0;
-  background-color: var(--brief-bg);
+  background-color: var(--brief-bg) !important;
   color: var(--brief-text);
   font-family: "DM Sans", sans-serif;
+  font-weight: 300;
 }
 
 .brief {
-  width: 420px;
-  padding: 32px;
+  width: 520px;
+  padding: 30px;
+  border-color: var(--brief-border) !important;
 }
 
 .brief-header { 
@@ -37,13 +40,30 @@ body {
 
 .brief-title { 
   color: var(--brief-headline);
+  font-size: 2rem;
+  line-height: 1.1;
 }
 
 .brief-eyebrow { 
   color: var(--brief-secondary);
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
+  font-size: 0.75rem;
+  font-weight: 600 !important;
 }
 
 .brief-meta { 
   color: var(--brief-secondary);
+}
+
+.story-headline {
+  font-size: 1rem;
+}
+
+.story-summary { 
+  font-family: 'Source Serif 4', serif;
+  font-size: 0.9rem;
+}
+
+.story-toggle:hover {
+  color: var(--brief-text);
 }

@@ -18,7 +18,7 @@ const App = () => {
   }
 
   return (
-    <main className="brief">
+    <main className="brief border border-2">
       <Header 
         date={mockBrief.date} 
         storyCount={mockBrief.stories.length}
