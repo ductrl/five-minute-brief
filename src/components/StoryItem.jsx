@@ -35,15 +35,19 @@ const StoryItem = ({
           <p className="story-summary pt-3">
             {summary}
           </p>
-          {sources.map(source => (
-            <a 
-              key={source.publisher}
-              href={source.url}
-              target="_blank"
-            >
-              {source.publisher}|
-            </a>
-          ))}
+          <div>
+            {sources.map(source => (
+              <a 
+                key={source.publisher}
+                href={source.url}
+                target="_blank"
+                className="source-button btn btn-sm border me-2 fw-bold text-uppercase"
+              >
+                {source.publisher}
+              </a>
+            ))}
+          </div>
+          
         </div>
       )}
     </article>

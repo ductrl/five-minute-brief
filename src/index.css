@@ -14,6 +14,10 @@
   --brief-text: #3E493D;
   --brief-secondary: #657064;
   --brief-border: #c2c4bb;
+  --btn-bg: #f1f0ea;
+  --btn-text: #353f31;
+  --btn-border: #b9c0b5;
+  --btn-shadow: #c6cac2;
 }
 
 * {
@@ -66,4 +70,17 @@ body {
 
 .story-toggle:hover {
   color: var(--brief-text);
+}
+
+.source-button {
+  color: var(--btn-text) !important;
+  border-color: var(--btn-border) !important;
+  background-color: var(--btn-bg);
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  box-shadow: 3px 3px 0 var(--btn-shadow);
+}
+
+.source-button:hover {
+  border-color: var(--brief-headline) !important;
 }
