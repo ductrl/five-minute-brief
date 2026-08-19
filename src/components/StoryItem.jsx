@@ -23,9 +23,7 @@ const StoryItem = ({
           {headline}
         </span> 
         <i
-          className={`bi ${
-            isOpen ? 'bi-chevron-up' : 'bi-chevron-down'
-          } ms-3 flex-shrink-0`}
+          className={`bi bi-chevron-down chevron ${isOpen ? 'chevron-open' : ''} ms-3 flex-shrink-0`}
         ></i>
       </button>
 

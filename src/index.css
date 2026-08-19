@@ -59,6 +59,14 @@ body {
   color: var(--brief-secondary);
 }
 
+.chevron { 
+  transition: transform 0.2s ease;
+}
+
+.chevron-open {
+  transform: rotate(180deg);
+}
+
 .story-headline {
   font-size: 1rem;
 }
