@@ -84,3 +84,16 @@ body {
 .source-button:hover {
   border-color: var(--brief-headline) !important;
 }
+
+.footer-message {
+  /* font-family: 'Source Serif 4', serif; */
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--brief-headline);
+}
+
+.footer-meta {
+  color: var(--brief-secondary);
+  font-size: 0.75rem;
+  letter-spacing: 0.05rem;
+}

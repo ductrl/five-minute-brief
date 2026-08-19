@@ -1,5 +1,5 @@
 const Header = ({ date, storyCount }) => (
-  <header className="brief-header border-bottom pb-4 mb-2">
+  <header className="brief-header border-bottom pb-4 mb-0">
     <p className="brief-eyebrow text-uppercase fw-bold mb-3">
       The essential read
     </p>
