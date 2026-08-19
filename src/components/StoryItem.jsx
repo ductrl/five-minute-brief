@@ -28,26 +28,26 @@ const StoryItem = ({
       </button>
 
       {/* ----- Content ----- */}
-      {isOpen && (
+      <div className={`story-collapse ${isOpen ? 'open' : ''}`}>
+        <p className="story-summary pt-3">
+          {summary}
+        </p>
         <div>
-          <p className="story-summary pt-3">
-            {summary}
-          </p>
-          <div>
-            {sources.map(source => (
-              <a 
-                key={source.publisher}
-                href={source.url}
-                target="_blank"
-                className="source-button btn btn-sm border me-2 fw-bold text-uppercase"
-              >
-                {source.publisher}
-              </a>
-            ))}
-          </div>
-          
+          {sources.map(source => (
+            <a 
+              key={source.publisher}
+              href={source.url}
+              target="_blank"
+              rel="noreferrer"
+              className="source-button btn btn-sm border me-2 fw-bold text-uppercase"
+            >
+              {source.publisher}
+            </a>
+          ))}
         </div>
-      )}
+        
+      </div>
+      
     </article>
   )
 }

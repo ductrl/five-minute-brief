@@ -80,6 +80,16 @@ body {
   color: var(--brief-text);
 }
 
+.story-collapse {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.story-collapse.open {
+  max-height: 500px;
+}
+
 .source-button {
   color: var(--btn-text) !important;
   border-color: var(--btn-border) !important;
