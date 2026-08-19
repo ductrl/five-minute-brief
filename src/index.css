@@ -3,7 +3,7 @@
   --brief-headline: #172018;
   --brief-text: #3E493D;
   --brief-secondary: #657064;
-  --brief-border: #b4bcac;
+  --brief-border: #c2c4bb;
 }
 
 * {
@@ -19,4 +19,21 @@ body {
 .brief {
   width: 420px;
   padding: 32px;
+}
+
+.brief-header { 
+  border-color: var(--brief-border) !important;
+}
+
+.brief-title { 
+  color: var(--brief-headline);
+}
+
+.brief-eyebrow { 
+  color: var(--brief-secondary);
+  letter-spacing: .1rem;
+}
+
+.brief-meta { 
+  color: var(--brief-secondary);
 }
