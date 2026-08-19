@@ -15,10 +15,10 @@ const App = () => {
         <StatusMessage status={status}/>
       </main>
     )
-}
+  }
 
   return (
-    <main>
+    <main className="brief">
       <Header 
         date={mockBrief.date} 
         storyCount={mockBrief.stories.length}
