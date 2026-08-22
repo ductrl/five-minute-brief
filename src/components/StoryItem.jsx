@@ -32,7 +32,7 @@ const StoryItem = ({
         <p className="story-summary pt-3">
           {summary}
         </p>
-        <div>
+        <div className="pb-2">
           {sources.map(source => (
             <a 
               key={source.publisher}
