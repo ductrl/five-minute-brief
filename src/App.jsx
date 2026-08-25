@@ -4,13 +4,14 @@ import Footer from "./components/Footer";
 import StatusMessage from "./components/StatusMessage";
 import { mockBrief } from "./data/mockBrief";
 import { useState } from "react";
+import z from "zod";
 
 const App = () => {
   const [status, setStatus] = useState('success');
 
   if (status !== 'success') {
     return (
-      <main>
+      <main className="brief border border-2">
         <Header/>
         <StatusMessage status={status}/>
       </main>
