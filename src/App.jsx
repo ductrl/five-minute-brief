@@ -3,11 +3,32 @@ import StoryList from "./components/StoryList";
 import Footer from "./components/Footer";
 import StatusMessage from "./components/StatusMessage";
 import { mockBrief } from "./data/mockBrief";
-import { useState } from "react";
-import z from "zod";
+import { useEffect, useState } from "react";
+import { EditionSchema } from "../schemas/edition";
 
 const App = () => {
-  const [status, setStatus] = useState('success');
+  const [status, setStatus] = useState('loading');
+  const [edition, setEdition] = useState(null);
+
+  useEffect(() => {
+    const loadEdition = async () => {
+      const response = await fetch('./current.json');
+      const data = await response.json();
+      console.log(data);
+
+      const result = EditionSchema.safeParse(data);
+
+      if (!result.success) {
+        setStatus('invalid-data');
+        return;
+      }
+
+      setStatus('success');
+      setEdition(data);
+    }
+
+    loadEdition();
+  }, [])
 
   if (status !== 'success') {
     return (
@@ -21,15 +42,15 @@ const App = () => {
   return (
     <main className="brief border border-2">
       <Header 
-        date={mockBrief.date} 
-        storyCount={mockBrief.stories.length}
+        date={edition.date} 
+        storyCount={edition.stories.length}
       />
 
       <StoryList 
-        stories={mockBrief.stories}
+        stories={edition.stories}
       />
 
-      <Footer publishedAt={mockBrief.publishedAt}/>
+      <Footer publishedAt={edition.publishedAt}/>
     </main>
   )
 }

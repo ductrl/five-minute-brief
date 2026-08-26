@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "editionDate": "2026-08-25",
+  "coverageStart": "2026-08-25T04:00:00Z",
+  "coverageEnd": "2026-08-26T04:00:00Z",
+  "publishedAt": "2026-08-25T22:30:00Z",
+  "stories": [
+    {
+      "id": "story-1",
+      "headline": "U.S.-Canada trade fight escalates as Canada announces retaliatory tariffs",
+      "summary": "Canada announced retaliatory tariffs on about $20 billion of U.S. goods as its trade dispute with Washington intensified. The measures follow new U.S. tariff threats, including possible higher duties on Canadian vehicles.",
+      "sources": [
+        {
+          "publisher": "Associated Press",
+          "url": "https://apnews.com/article/canada-trump-lake-810649a0a4143d9042094626c4a36dad"
+        },
+        {
+          "publisher": "Reuters",
+          "url": "https://www.reuters.com/business/carney-says-new-canadian-tariffs-us-goods-will-come-into-effect-september-8-2026-08-22/"
+        }
+      ]
+    },
+    {
+      "id": "story-2",
+      "headline": "Dolly Parton dies at 80 after six decades as a country music icon",
+      "summary": "Country music star Dolly Parton died at age 80 after a career spanning nearly six decades. She became one of the genre's most recognizable figures while also building a major legacy in film, philanthropy and literacy programs.",
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "url": "https://www.reuters.com/lifestyle/dolly-parton-has-died-family-says-2026-08-25/"
+        }
+      ]
+    },
+    {
+      "id": "story-3",
+      "headline": "U.S. widens sanctions on Iran as Tehran vows to resist new pressure",
+      "summary": "The United States expanded sanctions aimed at further isolating Iran's economy and targeting entities tied to its oil trade. Iran condemned the measures and said it would resist the latest U.S. pressure campaign.",
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "url": "https://www.reuters.com/world/china/iran-vows-retaliate-after-us-widens-sanctions-2026-08-25/"
+        },
+        {
+          "publisher": "Associated Press",
+          "url": "https://apnews.com/article/middle-east-iran-israel-syria-august-24-2026-4c37df8a725b49eae2ab1672b4ae4201"
+        }
+      ]
+    },
+    {
+      "id": "story-4",
+      "headline": "Wall Street rises as technology stocks rebound ahead of Nvidia earnings",
+      "summary": "Major U.S. stock indexes finished higher as technology shares recovered ahead of Nvidia's earnings report. Falling oil prices also helped ease pressure on bond yields and supported broader market gains.",
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "url": "https://www.reuters.com/business/us-stock-futures-rise-tech-rebound-before-nvidia-inflation-tests-2026-08-25/"
+        },
+        {
+          "publisher": "Associated Press",
+          "url": "https://apnews.com/article/69aae9f2f61737936f126e7820833bbe"
+        }
+      ]
+    },
+    {
+      "id": "story-5",
+      "headline": "Oil prices fall sharply despite expanded U.S. sanctions on Iran",
+      "summary": "Oil prices fell more than 3% as traders largely discounted the immediate supply impact of expanded U.S. sanctions on Iran. Brent crude dropped below $90 a barrel even as tensions around Iran and the Strait of Hormuz remained elevated.",
+      "sources": [
+        {
+          "publisher": "Reuters",
+          "url": "https://www.reuters.com/business/energy/oil-prices-steady-investors-weigh-impact-expanded-us-sanctions-against-iran-2026-08-25/"
+        }
+      ]
+    }
+  ]
+}
