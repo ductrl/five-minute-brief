@@ -1,5 +1,3 @@
-import { iso } from "zod";
-
 const formatEditionDate = (isoDate) => {
   const [year, month, day] = isoDate.split('-').map(Number);
 

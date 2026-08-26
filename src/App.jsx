@@ -12,19 +12,25 @@ const App = () => {
 
   useEffect(() => {
     const loadEdition = async () => {
-      const response = await fetch('./current.json');
-      const data = await response.json();
-      console.log(data);
+      try {
+        const response = await fetch('./current.json');
+        const data = await response.json();
+        console.log(data);
 
-      const result = EditionSchema.safeParse(data);
+        const result = EditionSchema.safeParse(data);
 
-      if (!result.success) {
+        if (!result.success) {
+          setStatus('invalid-data');
+          return;
+        }
+
+        setStatus('success');
+        setEdition(data);
+      } catch (error) {
+        console.error(error);
         setStatus('invalid-data');
-        return;
       }
-
-      setStatus('success');
-      setEdition(data);
+      
     }
 
     loadEdition();
