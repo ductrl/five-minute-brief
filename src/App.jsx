@@ -2,9 +2,9 @@ import Header from "./components/Header";
 import StoryList from "./components/StoryList";
 import Footer from "./components/Footer";
 import StatusMessage from "./components/StatusMessage";
-import { mockBrief } from "./data/mockBrief";
 import { useEffect, useState } from "react";
 import { EditionSchema } from "../schemas/edition";
+import { formatEditionDate, formatPublishedTime } from "./utils/date";
 
 const App = () => {
   const [status, setStatus] = useState('loading');
@@ -42,7 +42,7 @@ const App = () => {
   return (
     <main className="brief border border-2">
       <Header 
-        date={edition.date} 
+        date={formatEditionDate(edition.editionDate)} 
         storyCount={edition.stories.length}
       />
 
@@ -50,7 +50,7 @@ const App = () => {
         stories={edition.stories}
       />
 
-      <Footer publishedAt={edition.publishedAt}/>
+      <Footer publishedAt={formatPublishedTime(edition.publishedAt)}/>
     </main>
   )
 }
