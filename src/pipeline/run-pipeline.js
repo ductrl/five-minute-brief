@@ -1,4 +1,5 @@
-import { validateEdition } from "./validate-edition.js"; 
+import { validateEdition } from "./validate-edition.js";
+import { NEWS_SOURCES } from "./config/new-sources.js"; 
 
 const runPipeline = async () => {
   console.log('[pipeline] Starting');
@@ -13,6 +14,7 @@ const runPipeline = async () => {
   const validatedEdition = validateEdition(edition);
 
   console.log('[pipeline] Edition validated');
+  
 
   // write files
 }
