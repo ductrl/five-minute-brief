@@ -110,7 +110,7 @@ const getTocTimestamps = (coverageStart, coverageEnd) => {
 
 const collectHeadlines = async(coverageStart, coverageEnd) => {
   const timestamps = getTocTimestamps(coverageStart, coverageEnd);
-  const headlines = [];
+  const headlinesByUrl = new Map();
 
   for (const timestamp of timestamps) {
     const articles = await fetchTocFile(timestamp);
@@ -119,10 +119,14 @@ const collectHeadlines = async(coverageStart, coverageEnd) => {
 
     const approvedArticles = filterApprovedArticles(articles);
 
-    headlines.push(...approvedArticles);
+    for (const article of approvedArticles) {
+      if (!headlinesByUrl.has(article.url)) {
+        headlinesByUrl.set(article.url, article);
+      }
+    }
   }
 
-  return headlines;
+  return [...headlinesByUrl.values()]
 }
 
 const headlines = await collectHeadlines(
