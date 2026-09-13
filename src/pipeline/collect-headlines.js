@@ -11,6 +11,10 @@ const fetchTocFile = async (timeStamp) => {
 
   const response = await fetch(url);
 
+  if (response.status == 404) {
+    return []; // this is normal and pretty much expected
+  }
+
   if (!response.ok) {
     throw new Error(`Failed to fetch GDELT TOC: ${response.status} ${response.statusText}`);
   }
@@ -49,7 +53,7 @@ const getSourceFromUrl = (url) => {
   const hostname = new URL(url).hostname.toLowerCase();
 
   return NEWS_SOURCES.find(source => 
-    source.domains.some(domain => hostname === domain || hostname.endsWith(domain))
+    source.domains.some(domain => hostname === domain || hostname.endsWith(`.${domain}`))
   );
 }
 
@@ -76,11 +80,55 @@ const filterApprovedArticles = (articles) => {
   return approvedArticles;
 }
 
-const articles = await fetchTocFile('20260630201600')
+// convert JS Date object into TOC timestamp
+const formatGdeltTimestamp = (date) => {
+  const year = date.getUTCFullYear()
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0')
+  const day = String(date.getUTCDate()).padStart(2, '0')
+  const hour = String(date.getUTCHours()).padStart(2, '0')
+  const minute = String(date.getUTCMinutes()).padStart(2, '0')
 
-console.log(`All articles: ${articles.length}`)
+  return `${year}${month}${day}${hour}${minute}00`
+}
 
-const approvedArticles = filterApprovedArticles(articles)
+// get 1,440 timestamps for the past 24 hours
+const getTocTimestamps = (coverageStart, coverageEnd) => {
+  const timestamps = []
 
-console.log(`Approved articles: ${approvedArticles.length}`)
-console.log(approvedArticles.slice(0, 5));
+  const current = new Date(coverageStart)
+  const end = new Date(coverageEnd)
+
+  current.setUTCSeconds(0, 0)
+
+  while (current < end) {
+    timestamps.push(formatGdeltTimestamp(current))
+    current.setUTCMinutes(current.getUTCMinutes() + 1)
+  }
+
+  return timestamps
+}
+
+const collectHeadlines = async(coverageStart, coverageEnd) => {
+  const timestamps = getTocTimestamps(coverageStart, coverageEnd);
+  const headlines = [];
+
+  for (const timestamp of timestamps) {
+    const articles = await fetchTocFile(timestamp);
+
+    if (articles.length === 0) continue;
+
+    const approvedArticles = filterApprovedArticles(articles);
+
+    headlines.push(...approvedArticles);
+  }
+
+  return headlines;
+}
+
+const headlines = await collectHeadlines(
+  '2026-06-30T20:00:00Z',
+  '2026-06-30T21:00:00Z',
+)
+
+console.log(`Collected headlines: ${headlines.length}`)
+console.log(headlines.slice(0, 5))
