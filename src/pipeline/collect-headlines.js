@@ -1,11 +1,13 @@
 import { gunzipSync } from 'node:zlib';
 import { Buffer } from 'node:buffer';
 import { NEWS_SOURCES } from './config/new-sources.js';
+import { time } from 'node:console';
 
 const GDELT_BASE_URL = 'https://data.gdeltproject.org/gdeltv5/weblegacy/ngrams';
+const MAX_CONCURRENCY_REQUESTS = 5;
 
-const fetchTocFile = async (timeStamp) => {
-  const url = `${GDELT_BASE_URL}/${timeStamp}.toc.json.gz`;
+const fetchTocFile = async (timestamp) => {
+  const url = `${GDELT_BASE_URL}/${timestamp}.toc.json.gz`;
   
   console.log(`Fetching ${url}`);
 
@@ -50,7 +52,17 @@ const fetchTocFile = async (timeStamp) => {
 }
 
 const getSourceFromUrl = (url) => {
-  const hostname = new URL(url).hostname.toLowerCase();
+  if (!url || typeof url !== 'string') {
+    return undefined;
+  }
+
+  let hostname;
+
+  try {
+    hostname = new URL(url).hostname.toLowerCase();
+  } catch {
+    return undefined;
+  }
 
   return NEWS_SOURCES.find(source => 
     source.domains.some(domain => hostname === domain || hostname.endsWith(`.${domain}`))
@@ -112,16 +124,20 @@ const collectHeadlines = async(coverageStart, coverageEnd) => {
   const timestamps = getTocTimestamps(coverageStart, coverageEnd);
   const headlinesByUrl = new Map();
 
-  for (const timestamp of timestamps) {
-    const articles = await fetchTocFile(timestamp);
+  for (let i = 0; i < timestamps.length; i += MAX_CONCURRENCY_REQUESTS) {
+    const batch = timestamps.slice(i, i + MAX_CONCURRENCY_REQUESTS);
 
-    if (articles.length === 0) continue;
+    const results = await Promise.all(
+      batch.map(timestamp => fetchTocFile(timestamp))
+    );
 
-    const approvedArticles = filterApprovedArticles(articles);
+    for (const articles of results) {
+      const approvedArticles = filterApprovedArticles(articles);
 
-    for (const article of approvedArticles) {
-      if (!headlinesByUrl.has(article.url)) {
-        headlinesByUrl.set(article.url, article);
+      for (const article of approvedArticles) {
+        if (!headlinesByUrl.has(article.url)) {
+          headlinesByUrl.set(article.url, article);
+        }
       }
     }
   }
@@ -130,9 +146,9 @@ const collectHeadlines = async(coverageStart, coverageEnd) => {
 }
 
 const headlines = await collectHeadlines(
-  '2026-06-30T20:00:00Z',
-  '2026-06-30T21:00:00Z',
+  '2026-06-30T04:00:00Z',
+  '2026-07-01T04:00:00Z',
 )
 
-console.log(`Collected headlines: ${headlines.length}`)
-console.log(headlines.slice(0, 5))
+console.log(`Unique headlines: ${headlines.length}`)
+console.log(headlines.slice(0, 10))
